@@ -1,0 +1,57 @@
+const fs = require('fs');
+const path = require('path');
+
+const configDir = path.join(__dirname, '../../config/keyconfig');
+const files = fs.readdirSync(configDir).filter(f => f.endsWith('.json'));
+
+let changedCount = 0;
+
+for (const file of files) {
+  const filePath = path.join(configDir, file);
+  let data;
+  try {
+    data = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+  } catch (e) {
+    continue;
+  }
+  
+  if (!Array.isArray(data)) {
+    if (data.tools && Array.isArray(data.tools)) {
+      data = data.tools;
+    } else {
+      continue;
+    }
+  }
+
+  let changed = false;
+
+  for (const tool of data) {
+    if (tool.mode === 'silent') {
+      // Check if it's a long-running command
+      const cmd = tool.cmd || '';
+      const isLongRunning = 
+        cmd.includes(' logcat') || 
+        cmd.includes(' litellm-start') ||
+        cmd.includes(' litellm-logs') ||
+        cmd.includes(' litellm-local') ||
+        cmd.includes(' search-status') ||
+        cmd.includes(' caffeinate') ||
+        cmd.includes(' command palette') ||
+        cmd.includes(' docker stats') ||
+        cmd.includes(' node --inspect');
+
+      if (isLongRunning) {
+        console.log(`Changing ${tool.id} (${cmd}) from silent to cli`);
+        tool.mode = 'cli';
+        changed = true;
+        changedCount++;
+      }
+    }
+  }
+
+  if (changed) {
+    fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
+  }
+}
+
+console.log(`Changed ${changedCount} commands.`);

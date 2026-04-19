@@ -1,0 +1,116 @@
+{
+  "tools": [
+    {
+      "id": "ai-generated-1776263246409",
+      "title": "推送文件到Android设备",
+      "action": "将本地文件推送到设备",
+      "keys": "终端：adb push",
+      "mode": "silent",
+      "keyword": "推送",
+      "aliases": [
+        "adb push",
+        "push文件",
+        "adb推送"
+      ],
+      "tags": [
+        "adb",
+        "文件传输"
+      ],
+      "cmd": "adb push {flags} {local} {remote}",
+      "weight": 5,
+      "params": [
+        {
+          "id": "flags",
+          "type": "flags",
+          "description": "可选标志",
+          "optional": true,
+          "options": [
+            {
+              "title": "保留时间戳",
+              "value": "-p"
+            }
+          ]
+        },
+        {
+          "id": "local",
+          "type": "file",
+          "description": "本地文件路径",
+          "optional": false
+        },
+        {
+          "id": "remote",
+          "type": "file",
+          "description": "设备上的目标路径",
+          "optional": false
+        }
+      ]
+    },
+    {
+      "id": "kill-port-process",
+      "title": "关闭占用指定端口的程序",
+      "action": "查询并终止占用端口的进程",
+      "mode": "silent",
+      "keyword": "关闭端口占用",
+      "aliases": [
+        "killport",
+        "关闭端口",
+        "结束端口进程"
+      ],
+      "tags": [
+        "系统",
+        "网络",
+        "进程"
+      ],
+      "cmd": "lsof -i :{port} -t | xargs -r kill -9",
+      "weight": 5,
+      "params": [
+        {
+          "id": "port",
+          "type": "string",
+          "description": "要查询并关闭的端口号",
+          "optional": false
+        }
+      ]
+    },
+    {
+      "id": "alias-1776413212506",
+      "title": "hermes-daily",
+      "action": "Custom alias command",
+      "cmd": "h --resume 20260416_165427_c1ff56",
+      "mode": "cli",
+      "keyword": "h daily",
+      "weight": 10,
+      "tags": [
+        "alias",
+        "custom"
+      ]
+    },
+    {
+      "id": "alias-1776414410020",
+      "title": "enter daily hermess",
+      "action": "Custom workflow pipeline",
+      "cmd": "[Workflow]",
+      "mode": "workflow",
+      "keyword": "daily hermess",
+      "weight": 10,
+      "tags": [
+        "alias",
+        "custom",
+        "workflow"
+      ],
+      "steps": [
+        {
+          "id": "1776414377545",
+          "name": "enter daily dir",
+          "cmd": "cd /Users/yeshouyou/Work/daily"
+        },
+        {
+          "id": "1776414383330",
+          "name": "hermes-daily",
+          "cmd": "h --resume 20260416_165427_c1ff56",
+          "originalToolId": "alias-1776413212506"
+        }
+      ]
+    }
+  ]
+}

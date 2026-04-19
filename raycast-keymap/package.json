@@ -1,0 +1,211 @@
+{
+  "$schema": "https://www.raycast.com/schema/extension.json",
+  "name": "raycast-keymap",
+  "title": "KeyMap",
+  "description": "Search and execute CLI tools and reference books",
+  "icon": "assets/command-icon.png",
+  "author": "yeshouyou",
+  "license": "MIT",
+  "commands": [
+    {
+      "name": "km",
+      "title": "km",
+      "description": "Search and execute CLI commands",
+      "mode": "view",
+      "arguments": [
+        {
+          "name": "query",
+          "placeholder": "Search...",
+          "type": "text",
+          "required": false
+        }
+      ],
+      "icon": "assets/km-icon.svg"
+    },
+    {
+      "name": "kb",
+      "title": "kb",
+      "description": "Search and open reference books",
+      "mode": "view",
+      "arguments": [
+        {
+          "name": "query",
+          "placeholder": "Search...",
+          "type": "text",
+          "required": false
+        }
+      ],
+      "icon": "assets/kb-icon.svg"
+    }
+  ],
+  "preferences": [
+    {
+      "name": "toolsDir",
+      "type": "textfield",
+      "required": false,
+      "title": "Tools Directory",
+      "placeholder": "~/dir1, ~/dir2",
+      "description": "Absolute path(s) to tool JSONs. ⚠️ Use comma (,) to separate multiple paths.",
+      "default": "~/Work/agent/MyGuguGaga/key_map/examples"
+    },
+    {
+      "name": "booksDir",
+      "type": "textfield",
+      "required": false,
+      "title": "Books Directory",
+      "placeholder": "~/dir1, ~/dir2",
+      "description": "Absolute path(s) to book JSONs. ⚠️ Use comma (,) to separate multiple paths.",
+      "default": "~/Work/agent/MyGuguGaga/key_map/books"
+    },
+    {
+      "name": "aiTaskTimeoutSeconds",
+      "type": "textfield",
+      "required": false,
+      "title": "AI Task Timeout (Seconds)",
+      "description": "How long before an active AI task is considered timed out and removed.",
+      "default": "300"
+    },
+    {
+      "name": "remoteToolsUrls",
+      "type": "textfield",
+      "required": false,
+      "title": "Remote Tools URLs",
+      "description": "Comma-separated URLs to remote JSON tool libraries (e.g., https://raw.github.../team.json)",
+      "default": ""
+    },
+    {
+      "name": "contextAppMappings",
+      "type": "textfield",
+      "required": false,
+      "title": "Context App Mappings",
+      "description": "JSON mapping of App Name to tags (e.g., {\"code\": [\"node\", \"git\"], \"iterm2\": [\"docker\"]})",
+      "default": "{\"code\": [\"node\", \"git\", \"npm\"], \"cursor\": [\"node\", \"git\", \"npm\"], \"android studio\": [\"android\", \"adb\", \"gradle\"], \"xcode\": [\"xcode\", \"ios\", \"swift\"], \"iterm\": [\"git\", \"node\", \"docker\"], \"terminal\": [\"git\", \"node\", \"docker\"]}"
+    },
+    {
+      "name": "favoriteDirs",
+      "type": "textfield",
+      "required": false,
+      "title": "Favorite Directories",
+      "placeholder": "~/Downloads, ~/Projects, /tmp",
+      "description": "Comma-separated paths to show in the file browser dropdown.",
+      "default": "~/Downloads, ~/Desktop"
+    },
+    {
+      "name": "defaultShell",
+      "type": "textfield",
+      "required": false,
+      "title": "Default Shell (Silent Mode)",
+      "placeholder": "/opt/homebrew/bin/fish, /bin/zsh",
+      "description": "Absolute path to the shell used for silent execution. Leave empty to use system default.",
+      "default": ""
+    },
+    {
+      "name": "globalEnvVars",
+      "type": "textfield",
+      "required": false,
+      "title": "Global Environment Variables",
+      "placeholder": "{\"SERVER_IP\": \"192.168.1.1\", \"API_KEY\": \"xxx\"}",
+      "description": "JSON string of global variables to replace {{env.VAR_NAME}} in commands.",
+      "default": "{}"
+    },
+    {
+      "name": "scriptsDir",
+      "type": "textfield",
+      "required": false,
+      "title": "Scripts Directory",
+      "placeholder": "~/scripts1, ~/scripts2",
+      "description": "Absolute path(s) to custom dynamic scripts. ⚠️ Use comma (,) to separate multiple paths.",
+      "default": "~/Work/agent/MyGuguGaga/key_map/scripts"
+    },
+    {
+      "name": "aiTriggerPrefix",
+      "type": "textfield",
+      "required": false,
+      "title": "AI Trigger Prefix",
+      "description": "Character to trigger AI mode (e.g., @)",
+      "default": "@"
+    },
+    {
+      "name": "aiBaseUrl",
+      "type": "textfield",
+      "required": false,
+      "title": "AI Base URL",
+      "description": "OpenAI-compatible API Base URL (e.g., http://localhost:11434/v1 for Ollama)",
+      "default": "https://api.openai.com/v1"
+    },
+    {
+      "name": "aiApiKey",
+      "type": "password",
+      "required": false,
+      "title": "AI API Key",
+      "description": "API Key for the AI service (leave empty for local Ollama)"
+    },
+    {
+      "name": "aiModel",
+      "type": "textfield",
+      "required": false,
+      "title": "AI Model",
+      "description": "Model name (e.g., gpt-4o, llama3)",
+      "default": "gpt-4o"
+    },
+    {
+      "name": "fallbackAiBaseUrl",
+      "type": "textfield",
+      "required": false,
+      "title": "Fallback AI Base URL",
+      "description": "Base URL for fallback AI (used after 2 failures)",
+      "default": "https://api.openai.com/v1"
+    },
+    {
+      "name": "fallbackAiApiKey",
+      "type": "password",
+      "required": false,
+      "title": "Fallback AI API Key",
+      "description": "API Key for the fallback AI service"
+    },
+    {
+      "name": "fallbackAiModel",
+      "type": "textfield",
+      "required": false,
+      "title": "Fallback AI Model",
+      "description": "Fallback Model name (e.g., o1-preview, claude-3.5-sonnet)",
+      "default": "o1-preview"
+    },
+    {
+      "name": "aiHistoryRetentionDays",
+      "type": "textfield",
+      "required": false,
+      "title": "AI History Retention (Days)",
+      "description": "Number of days to keep AI query history",
+      "default": "7"
+    },
+    {
+      "name": "aiHistoryDisplayCount",
+      "type": "textfield",
+      "required": false,
+      "title": "AI History Display Count",
+      "description": "Number of AI history items to show on the main screen",
+      "default": "5"
+    }
+  ],
+  "dependencies": {
+    "@raycast/api": "1.79.0",
+    "@raycast/utils": "^1.16.3",
+    "fuse.js": "^7.3.0"
+  },
+  "devDependencies": {
+    "@raycast/eslint-config": "^1.0.8",
+    "@types/node": "20.8.10",
+    "@types/react": "18.3.3",
+    "eslint": "^8.57.0",
+    "prettier": "^3.2.5",
+    "typescript": "^5.4.5"
+  },
+  "scripts": {
+    "build": "ray build -e dist",
+    "dev": "ray develop",
+    "fix-lint": "ray lint --fix",
+    "lint": "ray lint",
+    "publish": "npx @raycast/api@latest publish"
+  }
+}

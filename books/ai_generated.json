@@ -1,0 +1,40 @@
+{
+  "books": [
+    {
+      "title": "AI 指南: 查看提交历史 (git log)",
+      "subtitle": "git log {flags} {path}",
+      "target": "git-log.md",
+      "tags": [
+        "ai-doc",
+        "git"
+      ]
+    },
+    {
+      "title": "AI 指南: 推送文件到设备",
+      "subtitle": "adb push {flags} {local_path} {remote_path}",
+      "target": "ai-generated-1776263621369.md",
+      "tags": [
+        "ai-doc",
+        "custom"
+      ]
+    },
+    {
+      "title": "AI 指南: 关闭占用指定端口的程序",
+      "subtitle": "lsof -i :{port} -t | xargs -r kill -9",
+      "target": "kill-port-process.md",
+      "tags": [
+        "ai-doc",
+        "custom"
+      ]
+    },
+    {
+      "title": "AI 指南: 安装 APK (adb install)",
+      "subtitle": "adb -s {device} install {flags} {apk}",
+      "target": "adb-install.md",
+      "tags": [
+        "ai-doc",
+        "android"
+      ]
+    }
+  ]
+}

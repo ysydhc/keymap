@@ -1,0 +1,1385 @@
+{
+  "aliases": [
+    "git",
+    "vcs",
+    "版本控制"
+  ],
+  "tools": [
+    {
+      "id": "git-clone",
+      "title": "克隆远程仓库",
+      "action": "把远程 URL 复制到本地新目录",
+      "keys": "终端：git clone <url> [目录名]",
+      "mode": "cli",
+      "keyword": "仓库",
+      "aliases": [
+        "clone",
+        "下载仓库"
+      ],
+      "tags": [
+        "git",
+        "远程",
+        "入门"
+      ],
+      "cmd": "git clone {url}",
+      "params": [
+        {
+          "id": "url",
+          "type": "brace",
+          "label": "远程地址",
+          "hint": "HTTPS 或 SSH",
+          "examples": [
+            "git@github.com:user/repo.git",
+            "https://github.com/user/repo.git"
+          ]
+        }
+      ],
+      "weight": 11,
+      "doc": "https://git-scm.com/docs/git-clone"
+    },
+    {
+      "id": "git-init",
+      "title": "初始化本地仓库",
+      "action": "在当前目录创建新的 Git 仓库",
+      "keys": "终端：git init",
+      "mode": "cli",
+      "keyword": "仓库",
+      "aliases": [
+        "init",
+        "新建仓库"
+      ],
+      "tags": [
+        "git",
+        "入门"
+      ],
+      "cmd": "git init",
+      "weight": 9,
+      "doc": "https://git-scm.com/docs/git-init"
+    },
+    {
+      "id": "git-status",
+      "title": "查看工作区状态",
+      "action": "显示已修改、已暂存与未跟踪文件",
+      "keys": "终端：git status",
+      "mode": "silent",
+      "keyword": "状态",
+      "aliases": [
+        "status",
+        "st"
+      ],
+      "tags": [
+        "git",
+        "日常"
+      ],
+      "cmd": "git status",
+      "weight": 12,
+      "doc": "https://git-scm.com/docs/git-status"
+    },
+    {
+      "id": "git-add",
+      "title": "暂存更改（git add）",
+      "action": "把修改加入暂存区，准备提交",
+      "keys": "终端：git add . / git add -p / git add <路径>",
+      "mode": "cli",
+      "keyword": "暂存",
+      "aliases": [
+        "add",
+        "stage"
+      ],
+      "tags": [
+        "git",
+        "日常"
+      ],
+      "description": "`-p` 按块挑选；`.` 表示当前目录全部跟踪变更。",
+      "cmd": "git add {path}",
+      "weight": 12,
+      "doc": "https://git-scm.com/docs/git-add",
+      "params": [
+        {
+          "id": "path",
+          "type": "file",
+          "description": "选择要暂存的文件",
+          "dynamic": "git_changed_files"
+        }
+      ]
+    },
+    {
+      "id": "git-commit",
+      "title": "提交暂存区 (git commit)",
+      "action": "生成一次带说明的提交",
+      "keys": "终端：git commit -m \"说明\"；修正上次：git commit --amend",
+      "mode": "silent",
+      "keyword": "提交",
+      "aliases": [
+        "commit",
+        "ci"
+      ],
+      "tags": [
+        "git",
+        "日常"
+      ],
+      "cmd": "git commit {flags} -m {message}",
+      "params": [
+        {
+          "id": "flags",
+          "type": "flags",
+          "description": "附加参数 (可多选)",
+          "optional": true,
+          "options": [
+            {
+              "title": "自动暂存已修改文件 (-a)",
+              "value": "-a"
+            },
+            {
+              "title": "追加到上次提交 (--amend)",
+              "value": "--amend"
+            },
+            {
+              "title": "跳过 Git Hooks (--no-verify)",
+              "value": "--no-verify"
+            },
+            {
+              "title": "允许空提交 (--allow-empty)",
+              "value": "--allow-empty"
+            }
+          ]
+        },
+        {
+          "id": "message",
+          "type": "brace",
+          "label": "提交说明",
+          "optional": true,
+          "hint": "可省略走编辑器",
+          "examples": [
+            "fix: 登录校验",
+            "feat: 导出 CSV"
+          ]
+        }
+      ],
+      "weight": 12,
+      "doc": "https://git-scm.com/docs/git-commit"
+    },
+    {
+      "id": "git-push",
+      "title": "推送 (Push)",
+      "action": "上传本地提交到远程仓库",
+      "keys": "终端：git push",
+      "mode": "cli",
+      "keyword": "远程",
+      "aliases": [
+        "push",
+        "上传"
+      ],
+      "tags": [
+        "git",
+        "远程",
+        "日常"
+      ],
+      "cmd": "git push {flags} {remote} {branch}",
+      "weight": 12,
+      "doc": "https://git-scm.com/docs/git-push",
+      "params": [
+        {
+          "id": "flags",
+          "type": "flags",
+          "description": "附加参数 (可多选)",
+          "optional": true,
+          "options": [
+            {
+              "title": "强制推送 (-f)",
+              "value": "-f"
+            },
+            {
+              "title": "设置上游关联 (-u)",
+              "value": "-u"
+            },
+            {
+              "title": "推送标签 (--tags)",
+              "value": "--tags"
+            }
+          ]
+        },
+        {
+          "id": "remote",
+          "type": "string",
+          "description": "远程仓库名 (如 origin)",
+          "dynamic": "git_remotes"
+        },
+        {
+          "id": "branch",
+          "type": "string",
+          "description": "要推送的分支",
+          "dynamic": "git_branches"
+        }
+      ]
+    },
+    {
+      "id": "git-pull",
+      "title": "拉取 (Pull)",
+      "action": "拉取远程分支并合并到本地",
+      "keys": "终端：git pull",
+      "mode": "cli",
+      "keyword": "远程",
+      "aliases": [
+        "pull",
+        "更新"
+      ],
+      "tags": [
+        "git",
+        "远程",
+        "日常"
+      ],
+      "cmd": "git pull {flags} {remote} {branch}",
+      "weight": 12,
+      "doc": "https://git-scm.com/docs/git-pull",
+      "params": [
+        {
+          "id": "flags",
+          "type": "flags",
+          "description": "附加参数 (可多选)",
+          "optional": true,
+          "options": [
+            {
+              "title": "使用变基合并 (--rebase)",
+              "value": "--rebase"
+            },
+            {
+              "title": "仅快进合并 (--ff-only)",
+              "value": "--ff-only"
+            }
+          ]
+        },
+        {
+          "id": "remote",
+          "type": "string",
+          "description": "远程仓库名 (如 origin)",
+          "dynamic": "git_remotes"
+        },
+        {
+          "id": "branch",
+          "type": "string",
+          "description": "要拉取的分支",
+          "dynamic": "git_branches"
+        }
+      ]
+    },
+    {
+      "id": "git-fetch",
+      "title": "抓取 (Fetch)",
+      "action": "只更新远程引用，不合并到本地",
+      "keys": "终端：git fetch",
+      "mode": "cli",
+      "keyword": "远程",
+      "aliases": [
+        "fetch",
+        "同步"
+      ],
+      "tags": [
+        "git",
+        "远程",
+        "日常"
+      ],
+      "cmd": "git fetch",
+      "weight": 12,
+      "doc": "https://git-scm.com/docs/git-fetch"
+    },
+    {
+      "id": "git-checkout",
+      "title": "切换/创建分支 (git checkout)",
+      "action": "切换到指定分支，或创建新分支",
+      "keys": "终端：git checkout <分支>",
+      "mode": "silent",
+      "keyword": "切换分支",
+      "aliases": [
+        "checkout",
+        "switch"
+      ],
+      "tags": [
+        "git",
+        "分支"
+      ],
+      "cmd": "git checkout {flags} {branch} {base_branch}",
+      "weight": 11,
+      "doc": "https://git-scm.com/docs/git-checkout",
+      "params": [
+        {
+          "id": "flags",
+          "type": "flags",
+          "description": "附加参数 (带 [互斥] 标签的请勿同时勾选)",
+          "optional": true,
+          "options": [
+            {
+              "title": "创建并切换 (-b) [与-B互斥]",
+              "value": "-b"
+            },
+            {
+              "title": "强制创建并切换 (-B) [与-b互斥]",
+              "value": "-B"
+            },
+            {
+              "title": "强制切换/丢弃修改 (-f)",
+              "value": "-f"
+            }
+          ]
+        },
+        {
+          "id": "branch",
+          "type": "string",
+          "description": "选择要切换或创建的分支名",
+          "dynamic": "git_branches"
+        },
+        {
+          "id": "base_branch",
+          "type": "string",
+          "description": "基于哪个分支 (新建分支时可选)",
+          "dynamic": "git_branches",
+          "optional": true,
+          "showIf": {
+            "paramId": "flags",
+            "includes": [
+              "-b",
+              "-B"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "git-branch",
+      "title": "分支管理 (git branch)",
+      "action": "列出、创建、删除或重命名分支",
+      "keys": "终端：git branch -a / -d",
+      "mode": "silent",
+      "keyword": "分支",
+      "aliases": [
+        "branch",
+        "list"
+      ],
+      "tags": [
+        "git",
+        "分支"
+      ],
+      "cmd": "git branch {flags} {branch} {base_branch}",
+      "weight": 11,
+      "doc": "https://git-scm.com/docs/git-branch",
+      "params": [
+        {
+          "id": "flags",
+          "type": "flags",
+          "description": "附加参数 (带 [互斥] 标签的请勿同时勾选)",
+          "optional": true,
+          "options": [
+            {
+              "title": "查看所有分支 (-a)",
+              "value": "-a"
+            },
+            {
+              "title": "查看远程分支 (-r)",
+              "value": "-r"
+            },
+            {
+              "title": "显示详细信息 (-v)",
+              "value": "-v"
+            },
+            {
+              "title": "🌟 查看所有并显示详情 (-a -v)",
+              "value": "-a -v"
+            },
+            {
+              "title": "删除分支 (-d) [与-D/-m互斥]",
+              "value": "-d"
+            },
+            {
+              "title": "强制删除 (-D) [与-d/-m互斥]",
+              "value": "-D"
+            },
+            {
+              "title": "重命名分支 (-m) [与-d/-D互斥]",
+              "value": "-m"
+            },
+            {
+              "title": "查看已合并分支 (--merged)",
+              "value": "--merged"
+            },
+            {
+              "title": "查看未合并分支 (--no-merged)",
+              "value": "--no-merged"
+            }
+          ]
+        },
+        {
+          "id": "branch",
+          "type": "string",
+          "description": "目标分支 (删除/重命名时需要填写)",
+          "dynamic": "git_branches",
+          "optional": true,
+          "showIf": {
+            "paramId": "flags",
+            "excludes": [
+              "-a",
+              "-r",
+              "-v",
+              "-vv",
+              "--merged",
+              "--no-merged",
+              "--show-current"
+            ]
+          },
+          "requiredIf": {
+            "paramId": "flags",
+            "includes": [
+              "-d",
+              "-D",
+              "-m",
+              "-M"
+            ]
+          }
+        },
+        {
+          "id": "base_branch",
+          "type": "string",
+          "description": "基于哪个分支 (新建分支时可选)",
+          "dynamic": "git_branches",
+          "optional": true,
+          "showIf": {
+            "paramId": "flags",
+            "excludes": [
+              "-d",
+              "-D",
+              "-m",
+              "-M",
+              "-a",
+              "-r",
+              "-v",
+              "-vv",
+              "--merged",
+              "--no-merged",
+              "--show-current"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "git-status",
+      "title": "查看状态",
+      "action": "查看工作区和暂存区的状态",
+      "keys": "终端：git status",
+      "mode": "silent",
+      "keyword": "状态",
+      "aliases": [
+        "status",
+        "st"
+      ],
+      "tags": [
+        "git",
+        "状态"
+      ],
+      "cmd": "git status",
+      "weight": 12,
+      "doc": "https://git-scm.com/docs/git-status"
+    },
+    {
+      "id": "git-merge",
+      "title": "合并分支 (git merge)",
+      "action": "将指定分支合并到当前分支",
+      "keys": "终端：git merge <分支>",
+      "mode": "silent",
+      "keyword": "分支",
+      "aliases": [
+        "merge",
+        "合并"
+      ],
+      "tags": [
+        "git",
+        "分支"
+      ],
+      "cmd": "git merge {flags} {branch} {commit}",
+      "weight": 10,
+      "doc": "https://git-scm.com/docs/git-merge",
+      "params": [
+        {
+          "id": "flags",
+          "type": "flags",
+          "description": "附加参数 / 流程控制",
+          "optional": true,
+          "options": [
+            {
+              "title": "禁用快进，强制生成合并提交 (--no-ff)",
+              "value": "--no-ff"
+            },
+            {
+              "title": "压缩为一次提交 (--squash)",
+              "value": "--squash"
+            },
+            {
+              "title": "继续合并 (--continue) [互斥]",
+              "value": "--continue"
+            },
+            {
+              "title": "放弃合并 (--abort) [互斥]",
+              "value": "--abort"
+            }
+          ]
+        },
+        {
+          "id": "branch",
+          "type": "string",
+          "description": "要合并进来的分支 (与提交二选一)",
+          "dynamic": "git_branches",
+          "optional": true,
+          "showIf": {
+            "paramId": "flags",
+            "excludes": [
+              "--continue",
+              "--abort"
+            ]
+          }
+        },
+        {
+          "id": "commit",
+          "type": "string",
+          "description": "要合并进来的提交 (与分支二选一)",
+          "dynamic": "git_commits",
+          "optional": true,
+          "showIf": {
+            "paramId": "flags",
+            "excludes": [
+              "--continue",
+              "--abort"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "git-rebase",
+      "title": "变基 (git rebase)",
+      "action": "将当前分支的提交重新应用到另一基线上",
+      "keys": "终端：git rebase <上游分支>",
+      "mode": "silent",
+      "keyword": "分支",
+      "aliases": [
+        "rebase",
+        "变基"
+      ],
+      "tags": [
+        "git",
+        "分支"
+      ],
+      "cmd": "git rebase {flags} {branch} {commit}",
+      "weight": 10,
+      "doc": "https://git-scm.com/docs/git-rebase",
+      "params": [
+        {
+          "id": "flags",
+          "type": "flags",
+          "description": "附加参数 / 流程控制",
+          "optional": true,
+          "options": [
+            {
+              "title": "交互式变基 (-i)",
+              "value": "-i"
+            },
+            {
+              "title": "保留合并提交 (--rebase-merges)",
+              "value": "--rebase-merges"
+            },
+            {
+              "title": "继续变基 (--continue) [互斥]",
+              "value": "--continue"
+            },
+            {
+              "title": "放弃变基 (--abort) [互斥]",
+              "value": "--abort"
+            },
+            {
+              "title": "跳过当前 (--skip) [互斥]",
+              "value": "--skip"
+            }
+          ]
+        },
+        {
+          "id": "branch",
+          "type": "string",
+          "description": "基线分支 (与提交二选一)",
+          "dynamic": "git_branches",
+          "optional": true,
+          "showIf": {
+            "paramId": "flags",
+            "excludes": [
+              "--continue",
+              "--abort",
+              "--skip"
+            ]
+          }
+        },
+        {
+          "id": "commit",
+          "type": "string",
+          "description": "基线提交 (与分支二选一)",
+          "dynamic": "git_commits",
+          "optional": true,
+          "showIf": {
+            "paramId": "flags",
+            "excludes": [
+              "--continue",
+              "--abort",
+              "--skip"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "git-stash-pop",
+      "title": "恢复贮藏 (Stash Pop)",
+      "action": "恢复并删除指定的 stash",
+      "keys": "终端：git stash pop",
+      "mode": "silent",
+      "keyword": "暂存",
+      "aliases": [
+        "stash pop",
+        "恢复贮藏"
+      ],
+      "tags": [
+        "git",
+        "日常"
+      ],
+      "cmd": "git stash pop {stash_id}",
+      "weight": 10,
+      "doc": "https://git-scm.com/docs/git-stash",
+      "params": [
+        {
+          "id": "stash_id",
+          "type": "string",
+          "description": "选择要恢复的贮藏 (可选，默认最新)",
+          "dynamic": "git_stashes",
+          "optional": true
+        }
+      ]
+    },
+    {
+      "id": "git-log",
+      "title": "查看提交历史 (git log)",
+      "action": "显示提交记录；常用 `--oneline --graph --decorate`",
+      "keys": "终端：git log；git log -p；git log --oneline -10",
+      "mode": "silent",
+      "keyword": "历史",
+      "aliases": [
+        "log",
+        "提交记录"
+      ],
+      "tags": [
+        "git",
+        "历史"
+      ],
+      "cmd": "git log {flags} {path}",
+      "weight": 11,
+      "doc": "https://git-scm.com/docs/git-log",
+      "params": [
+        {
+          "id": "flags",
+          "type": "flags",
+          "description": "附加参数 (可多选)",
+          "optional": true,
+          "options": [
+            {
+              "title": "单行精简显示 (--oneline)",
+              "value": "--oneline"
+            },
+            {
+              "title": "显示图形化分支树 (--graph)",
+              "value": "--graph"
+            },
+            {
+              "title": "显示文件修改统计 (--stat)",
+              "value": "--stat"
+            },
+            {
+              "title": "显示具体代码差异 (-p)",
+              "value": "-p"
+            },
+            {
+              "title": "最近 5 条 (-5)",
+              "value": "-5"
+            },
+            {
+              "title": "最近 10 条 (-10)",
+              "value": "-10"
+            }
+          ]
+        },
+        {
+          "id": "path",
+          "type": "directory",
+          "description": "特定文件或目录 (可选)",
+          "dynamic": "file_path",
+          "optional": true
+        }
+      ]
+    },
+    {
+      "id": "git-diff",
+      "title": "查看差异",
+      "action": "比较工作区、暂存区与提交之间的 diff",
+      "keys": "终端：git diff；git diff --staged；git diff <提交1> <提交2>",
+      "mode": "silent",
+      "keyword": "差异",
+      "aliases": [
+        "diff",
+        "对比"
+      ],
+      "tags": [
+        "git",
+        "日常"
+      ],
+      "cmd": "git diff {flags} {commit1} {commit2} {path}",
+      "weight": 11,
+      "doc": "https://git-scm.com/docs/git-diff",
+      "params": [
+        {
+          "id": "flags",
+          "type": "flags",
+          "description": "附加参数 (可多选)",
+          "optional": true,
+          "options": [
+            {
+              "title": "查看已暂存的差异 (--staged)",
+              "value": "--staged"
+            },
+            {
+              "title": "仅显示变化的文件名 (--name-only)",
+              "value": "--name-only"
+            },
+            {
+              "title": "显示修改统计 (--stat)",
+              "value": "--stat"
+            }
+          ]
+        },
+        {
+          "id": "commit1",
+          "type": "string",
+          "description": "对比的提交1 (可选)",
+          "dynamic": "git_commits",
+          "optional": true,
+          "showIf": {
+            "paramId": "flags",
+            "excludes": [
+              "--staged"
+            ]
+          }
+        },
+        {
+          "id": "commit2",
+          "type": "string",
+          "description": "对比的提交2 (可选)",
+          "dynamic": "git_commits",
+          "optional": true,
+          "showIf": {
+            "paramId": "flags",
+            "excludes": [
+              "--staged"
+            ]
+          }
+        },
+        {
+          "id": "path",
+          "type": "directory",
+          "description": "特定文件或目录 (可选)",
+          "dynamic": "file_path",
+          "optional": true
+        }
+      ]
+    },
+    {
+      "id": "git-show",
+      "title": "显示某次提交详情",
+      "action": "查看指定 commit 的补丁与元数据",
+      "keys": "终端：git show；git show <commit>",
+      "mode": "silent",
+      "keyword": "历史",
+      "aliases": [
+        "show"
+      ],
+      "tags": [
+        "git",
+        "历史"
+      ],
+      "cmd": "git show",
+      "weight": 9,
+      "doc": "https://git-scm.com/docs/git-show"
+    },
+    {
+      "id": "git-reset",
+      "title": "重置提交 (Reset)",
+      "action": "移动 HEAD 与分支指针",
+      "keys": "终端：git reset <模式> <提交>",
+      "mode": "silent",
+      "keyword": "撤销",
+      "aliases": [
+        "reset",
+        "回滚"
+      ],
+      "tags": [
+        "git",
+        "历史"
+      ],
+      "cmd": "git reset {mode} {commit} {branch} {path}",
+      "weight": 9,
+      "doc": "https://git-scm.com/docs/git-reset",
+      "params": [
+        {
+          "id": "mode",
+          "type": "string",
+          "description": "重置模式",
+          "values": [
+            "--soft",
+            "--mixed",
+            "--hard"
+          ]
+        },
+        {
+          "id": "commit",
+          "type": "string",
+          "description": "目标提交 (与分支二选一)",
+          "dynamic": "git_commits",
+          "optional": true
+        },
+        {
+          "id": "branch",
+          "type": "string",
+          "description": "目标分支 (与提交二选一)",
+          "dynamic": "git_branches",
+          "optional": true
+        },
+        {
+          "id": "path",
+          "type": "file",
+          "description": "特定文件 (可选，仅限 mixed 模式)",
+          "dynamic": "file_path",
+          "optional": true,
+          "showIf": {
+            "paramId": "mode",
+            "excludes": [
+              "--hard",
+              "--soft"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "git-revert",
+      "title": "撤销提交 (Revert)",
+      "action": "生成一个新提交来反向撤销指定提交",
+      "keys": "终端：git revert <commit>",
+      "mode": "silent",
+      "keyword": "撤销",
+      "aliases": [
+        "revert",
+        "反做"
+      ],
+      "tags": [
+        "git",
+        "历史"
+      ],
+      "cmd": "git revert {commit} {branch}",
+      "weight": 9,
+      "doc": "https://git-scm.com/docs/git-revert",
+      "params": [
+        {
+          "id": "commit",
+          "type": "string",
+          "description": "目标提交 (与分支二选一)",
+          "optional": true
+        },
+        {
+          "id": "branch",
+          "type": "string",
+          "description": "目标分支 (与提交二选一)",
+          "dynamic": "git_branches",
+          "optional": true
+        }
+      ]
+    },
+    {
+      "id": "git-cherry-pick",
+      "title": "拣选提交 (git cherry-pick)",
+      "action": "把指定提交的补丁应用到当前分支",
+      "keys": "终端：git cherry-pick <commit>",
+      "mode": "silent",
+      "keyword": "分支",
+      "aliases": [
+        "cherry-pick",
+        "拣选"
+      ],
+      "tags": [
+        "git",
+        "分支"
+      ],
+      "cmd": "git cherry-pick {flags} {commit} {branch}",
+      "weight": 8,
+      "doc": "https://git-scm.com/docs/git-cherry-pick",
+      "params": [
+        {
+          "id": "flags",
+          "type": "flags",
+          "description": "附加参数 / 流程控制",
+          "optional": true,
+          "options": [
+            {
+              "title": "仅应用不提交 (-n)",
+              "value": "-n"
+            },
+            {
+              "title": "继续拣选 (--continue) [互斥]",
+              "value": "--continue"
+            },
+            {
+              "title": "放弃拣选 (--abort) [互斥]",
+              "value": "--abort"
+            },
+            {
+              "title": "跳过当前 (--skip) [互斥]",
+              "value": "--skip"
+            }
+          ]
+        },
+        {
+          "id": "commit",
+          "type": "string",
+          "description": "目标提交 (与分支二选一)",
+          "dynamic": "git_commits",
+          "optional": true,
+          "showIf": {
+            "paramId": "flags",
+            "excludes": [
+              "--continue",
+              "--abort",
+              "--skip"
+            ]
+          }
+        },
+        {
+          "id": "branch",
+          "type": "string",
+          "description": "目标分支 (与提交二选一)",
+          "dynamic": "git_branches",
+          "optional": true,
+          "showIf": {
+            "paramId": "flags",
+            "excludes": [
+              "--continue",
+              "--abort",
+              "--skip"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "git-remote",
+      "title": "远程仓库管理 (git remote)",
+      "action": "查看、添加、删除远程地址（origin 等）",
+      "keys": "终端：git remote -v；git remote add origin <url>",
+      "mode": "silent",
+      "keyword": "远程",
+      "aliases": [
+        "remote",
+        "origin"
+      ],
+      "tags": [
+        "git",
+        "远程"
+      ],
+      "cmd": "git remote {subcommand} {name} {url}",
+      "weight": 9,
+      "doc": "https://git-scm.com/docs/git-remote",
+      "params": [
+        {
+          "id": "subcommand",
+          "type": "string",
+          "description": "操作类型",
+          "options": [
+            {
+              "title": "查看列表 (-v)",
+              "value": "-v"
+            },
+            {
+              "title": "添加远程 (add)",
+              "value": "add"
+            },
+            {
+              "title": "删除远程 (remove)",
+              "value": "remove"
+            },
+            {
+              "title": "修改地址 (set-url)",
+              "value": "set-url"
+            },
+            {
+              "title": "重命名 (rename)",
+              "value": "rename"
+            }
+          ]
+        },
+        {
+          "id": "name",
+          "type": "string",
+          "description": "远程名称 (如 origin)",
+          "dynamic": "git_remotes",
+          "optional": true,
+          "showIf": {
+            "paramId": "subcommand",
+            "excludes": [
+              "-v"
+            ]
+          },
+          "requiredIf": {
+            "paramId": "subcommand",
+            "includes": [
+              "add",
+              "remove",
+              "set-url",
+              "rename"
+            ]
+          }
+        },
+        {
+          "id": "url",
+          "type": "string",
+          "description": "远程 URL 地址",
+          "optional": true,
+          "showIf": {
+            "paramId": "subcommand",
+            "includes": [
+              "add",
+              "set-url"
+            ]
+          },
+          "requiredIf": {
+            "paramId": "subcommand",
+            "includes": [
+              "add",
+              "set-url"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "git-tag",
+      "title": "标签管理 (git tag)",
+      "action": "给某次提交打版本号或里程碑标记",
+      "keys": "终端：git tag；git tag v1.0.0 <commit>；git push --tags",
+      "mode": "silent",
+      "keyword": "发布",
+      "aliases": [
+        "tag",
+        "版本标签"
+      ],
+      "tags": [
+        "git",
+        "发布"
+      ],
+      "cmd": "git tag {flags} {tag_name} {commit}",
+      "weight": 8,
+      "doc": "https://git-scm.com/docs/git-tag",
+      "params": [
+        {
+          "id": "flags",
+          "type": "flags",
+          "description": "操作类型",
+          "optional": true,
+          "options": [
+            {
+              "title": "添加附注标签 (-a)",
+              "value": "-a"
+            },
+            {
+              "title": "删除标签 (-d) [互斥]",
+              "value": "-d"
+            },
+            {
+              "title": "列出标签 (-l) [互斥]",
+              "value": "-l"
+            }
+          ]
+        },
+        {
+          "id": "tag_name",
+          "type": "string",
+          "description": "标签名称 (如 v1.0.0)",
+          "optional": true,
+          "showIf": {
+            "paramId": "flags",
+            "excludes": [
+              "-l"
+            ]
+          },
+          "requiredIf": {
+            "paramId": "flags",
+            "includes": [
+              "-a",
+              "-d"
+            ]
+          }
+        },
+        {
+          "id": "commit",
+          "type": "string",
+          "description": "目标提交 (可选，默认 HEAD)",
+          "dynamic": "git_commits",
+          "optional": true,
+          "showIf": {
+            "paramId": "flags",
+            "excludes": [
+              "-d",
+              "-l"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "git-config",
+      "title": "配置用户名与行为",
+      "action": "读写 `git config`：user.name、user.email、alias、core.editor 等",
+      "keys": "终端：git config --global user.name \"…\"；git config --list",
+      "mode": "silent",
+      "keyword": "配置",
+      "aliases": [
+        "config",
+        "设置"
+      ],
+      "tags": [
+        "git",
+        "配置"
+      ],
+      "cmd": "git config",
+      "weight": 10,
+      "doc": "https://git-scm.com/docs/git-config"
+    },
+    {
+      "id": "git-blame",
+      "title": "按行追溯（blame）",
+      "action": "显示每行代码最后由哪次提交修改",
+      "keys": "终端：git blame <文件>",
+      "mode": "silent",
+      "keyword": "历史",
+      "aliases": [
+        "blame",
+        "追责"
+      ],
+      "tags": [
+        "git",
+        "历史"
+      ],
+      "cmd": "git blame",
+      "weight": 8,
+      "doc": "https://git-scm.com/docs/git-blame"
+    },
+    {
+      "id": "git-reflog",
+      "title": "引用日志（reflog）",
+      "action": "查看 HEAD 与分支指针变动历史，用于找回“丢失”提交",
+      "keys": "终端：git reflog",
+      "mode": "silent",
+      "keyword": "历史",
+      "aliases": [
+        "reflog",
+        "恢复"
+      ],
+      "tags": [
+        "git",
+        "救急"
+      ],
+      "cmd": "git reflog",
+      "weight": 8,
+      "doc": "https://git-scm.com/docs/git-reflog"
+    },
+    {
+      "id": "git-bisect",
+      "title": "二分查找坏提交（bisect）",
+      "action": "在好/坏提交之间自动二分定位引入 bug 的提交",
+      "keys": "终端：git bisect start；git bisect good/bad",
+      "mode": "silent",
+      "keyword": "调试",
+      "aliases": [
+        "bisect",
+        "二分"
+      ],
+      "tags": [
+        "git",
+        "调试"
+      ],
+      "cmd": "git bisect",
+      "weight": 6,
+      "doc": "https://git-scm.com/docs/git-bisect"
+    },
+    {
+      "id": "git-clean",
+      "title": "清理未跟踪文件",
+      "action": "删除未纳入版本控制的文件；常配合 `-n` 预览、`-f` 强制",
+      "keys": "终端：git clean -fd；git clean -nd（干跑）",
+      "mode": "silent",
+      "keyword": "清理",
+      "aliases": [
+        "clean"
+      ],
+      "tags": [
+        "git",
+        "救急"
+      ],
+      "description": "会删未跟踪文件，使用前建议先 `git clean -n`。",
+      "cmd": "git clean {flags}",
+      "weight": 7,
+      "doc": "https://git-scm.com/docs/git-clean",
+      "params": [
+        {
+          "id": "flags",
+          "type": "flags",
+          "description": "附加参数 (可多选)",
+          "optional": true,
+          "options": [
+            {
+              "title": "强制删除 (-f)",
+              "value": "-f"
+            },
+            {
+              "title": "包含未跟踪目录 (-d)",
+              "value": "-d"
+            },
+            {
+              "title": "干跑/预览 (-n)",
+              "value": "-n"
+            },
+            {
+              "title": "包含被忽略的文件 (-x)",
+              "value": "-x"
+            },
+            {
+              "title": "🌟 强制清理文件和目录 (-fd)",
+              "value": "-fd"
+            },
+            {
+              "title": "🌟 彻底清理(含忽略文件) (-fdx)",
+              "value": "-fdx"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "git-submodule",
+      "title": "子模块（submodule）",
+      "action": "在父仓库中嵌入并跟踪其他 Git 仓库",
+      "keys": "终端：git submodule update --init --recursive",
+      "mode": "silent",
+      "keyword": "子模块",
+      "aliases": [
+        "submodule"
+      ],
+      "tags": [
+        "git",
+        "高级"
+      ],
+      "cmd": "git submodule",
+      "weight": 6,
+      "doc": "https://git-scm.com/docs/git-submodule"
+    },
+    {
+      "id": "git-pager-less",
+      "title": "分页器内快捷键（less，查看 log/diff 时）",
+      "action": "Git 默认用 less 显示长输出时的常用键",
+      "keys": "q 退出；Space 下一屏；b 上一屏；↓/↑ 行滚动；/ 搜索；n/N 下一处/上一处匹配；g/G 到顶/底",
+      "mode": "pager",
+      "keyword": "快捷键",
+      "aliases": [
+        "less",
+        "分页",
+        "翻页"
+      ],
+      "tags": [
+        "git",
+        "终端",
+        "快捷键"
+      ],
+      "description": "与系统 `less` 行为一致；若设置 `core.pager` 为其它程序则不同。",
+      "cmd": "less pager",
+      "weight": 10,
+      "doc": "https://git-scm.com/docs/git-config#Documentation/git-config.txt-corepager",
+      "mac": "q 退出"
+    },
+    {
+      "id": "git-interactive-add",
+      "title": "交互式暂存（按块 stage）",
+      "action": "逐块审查 diff 并选择是否加入暂存区",
+      "keys": "终端：git add -p 或 git add --patch",
+      "mode": "silent",
+      "keyword": "暂存",
+      "aliases": [
+        "patch",
+        "交互 add"
+      ],
+      "tags": [
+        "git",
+        "日常"
+      ],
+      "cmd": "git add -p",
+      "weight": 9,
+      "doc": "https://git-scm.com/docs/git-add#Documentation/git-add.txt-patch"
+    },
+    {
+      "id": "git-rebase-interactive",
+      "title": "交互式变基（整理提交）",
+      "action": "在编辑器中 squash、reword、drop、reorder 提交",
+      "keys": "终端：git rebase -i HEAD~n",
+      "mode": "cli",
+      "keyword": "分支",
+      "aliases": [
+        "interactive rebase",
+        "squash"
+      ],
+      "tags": [
+        "git",
+        "历史"
+      ],
+      "description": "编辑器内按提示修改 `pick`/`squash` 等；保存退出后继续。",
+      "cmd": "git rebase -i",
+      "weight": 8,
+      "doc": "https://git-scm.com/docs/git-rebase#Documentation/git-rebase.txt--interactive"
+    },
+    {
+      "id": "git-diff-staged-file",
+      "title": "查看已暂存文件的差异",
+      "action": "显示已 git add 的文件的修改内容",
+      "keys": "终端：git diff --staged",
+      "mode": "cli",
+      "keyword": "查看已暂存差异",
+      "aliases": [
+        "git diff staged",
+        "git diff --staged"
+      ],
+      "tags": [
+        "git",
+        "diff",
+        "暂存",
+        "AI生成"
+      ],
+      "cmd": "git diff --staged {file}",
+      "weight": 5,
+      "params": [
+        {
+          "id": "file",
+          "type": "file",
+          "description": "要查看差异的文件路径",
+          "optional": false,
+          "dynamic": "file_path"
+        }
+      ]
+    }
+  ]
+}

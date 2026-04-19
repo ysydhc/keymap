@@ -1,0 +1,655 @@
+{
+  "aliases": [
+    "xcode",
+    "ios",
+    "swift",
+    "apple",
+    "mac"
+  ],
+  "tools": [
+    {
+      "id": "xcode-open-quickly",
+      "title": "快速打开文件/类/方法 (Open Quickly)",
+      "action": "全局模糊搜索并快速打开文件、类、方法或变量",
+      "keys": "macOS: Cmd + Shift + O",
+      "mode": "shortcut",
+      "keyword": "查找",
+      "aliases": [
+        "open quickly",
+        "快速打开",
+        "查找文件",
+        "搜索文件"
+      ],
+      "tags": [
+        "xcode",
+        "ios",
+        "查找",
+        "导航"
+      ],
+      "cmd": "Xcode 快捷键",
+      "mac": "Cmd + Shift + O",
+      "weight": 12
+    },
+    {
+      "id": "xcode-filter-navigator",
+      "title": "在目录树中过滤文件",
+      "action": "光标定位到左侧目录树底部的搜索框，用于按文件名过滤",
+      "keys": "macOS: Cmd + Opt + J",
+      "mode": "shortcut",
+      "keyword": "查找",
+      "aliases": [
+        "filter",
+        "过滤文件",
+        "查找文件",
+        "目录搜索"
+      ],
+      "tags": [
+        "xcode",
+        "ios",
+        "查找",
+        "导航"
+      ],
+      "cmd": "Xcode 快捷键",
+      "mac": "Cmd + Opt + J",
+      "weight": 11
+    },
+    {
+      "id": "xcode-reveal-in-navigator",
+      "title": "在目录树中定位当前文件",
+      "action": "在左侧 Project Navigator 中展开并高亮当前正在编辑的文件",
+      "keys": "macOS: Cmd + Shift + J",
+      "mode": "gui",
+      "keyword": "定位",
+      "aliases": [
+        "reveal",
+        "定位文件",
+        "当前文件"
+      ],
+      "tags": [
+        "xcode",
+        "ios",
+        "导航"
+      ],
+      "cmd": "Xcode 快捷键",
+      "mac": "Cmd + Shift + J",
+      "weight": 10
+    },
+    {
+      "id": "xcode-find-workspace",
+      "title": "全局搜索文本 (Find in Workspace)",
+      "action": "在整个工作区的所有文件中搜索指定文本",
+      "keys": "macOS: Cmd + Shift + F",
+      "mode": "shortcut",
+      "keyword": "查找",
+      "aliases": [
+        "find",
+        "全局搜索",
+        "搜索文本"
+      ],
+      "tags": [
+        "xcode",
+        "ios",
+        "查找",
+        "导航"
+      ],
+      "cmd": "Xcode 快捷键",
+      "mac": "Cmd + Shift + F",
+      "weight": 11
+    },
+    {
+      "id": "xcode-replace-workspace",
+      "title": "全局替换文本 (Replace in Workspace)",
+      "action": "在整个工作区的所有文件中替换指定文本",
+      "keys": "macOS: Cmd + Opt + Shift + F",
+      "mode": "gui",
+      "keyword": "替换",
+      "aliases": [
+        "replace",
+        "全局替换"
+      ],
+      "tags": [
+        "xcode",
+        "ios",
+        "查找",
+        "编辑"
+      ],
+      "cmd": "Xcode 快捷键",
+      "mac": "Cmd + Opt + Shift + F",
+      "weight": 9
+    },
+    {
+      "id": "xcode-find-file",
+      "title": "当前文件内搜索 (Find in File)",
+      "action": "在当前打开的文件中搜索文本",
+      "keys": "macOS: Cmd + F",
+      "mode": "shortcut",
+      "keyword": "查找",
+      "aliases": [
+        "find local",
+        "文件内搜索"
+      ],
+      "tags": [
+        "xcode",
+        "ios",
+        "查找"
+      ],
+      "cmd": "Xcode 快捷键",
+      "mac": "Cmd + F",
+      "weight": 10
+    },
+    {
+      "id": "xcode-replace-file",
+      "title": "当前文件内替换 (Replace in File)",
+      "action": "在当前打开的文件中替换文本",
+      "keys": "macOS: Cmd + Opt + F",
+      "mode": "shortcut",
+      "keyword": "替换",
+      "aliases": [
+        "replace local",
+        "文件内替换"
+      ],
+      "tags": [
+        "xcode",
+        "ios",
+        "查找",
+        "编辑"
+      ],
+      "cmd": "Xcode 快捷键",
+      "mac": "Cmd + Opt + F",
+      "weight": 9
+    },
+    {
+      "id": "xcode-jump-definition",
+      "title": "跳转到定义 (Jump to Definition)",
+      "action": "跳转到光标所在符号的定义处",
+      "keys": "macOS: Ctrl + Cmd + J",
+      "mode": "gui",
+      "keyword": "跳转",
+      "aliases": [
+        "definition",
+        "跳转定义",
+        "go to definition"
+      ],
+      "tags": [
+        "xcode",
+        "ios",
+        "导航"
+      ],
+      "cmd": "Xcode 快捷键",
+      "mac": "Ctrl + Cmd + J",
+      "weight": 11
+    },
+    {
+      "id": "xcode-show-related",
+      "title": "查看调用者/相关项 (Show Related Items)",
+      "action": "打开弹窗查看谁调用了这个方法，或者该类的父类/子类",
+      "keys": "macOS: Ctrl + 1",
+      "mode": "shortcut",
+      "keyword": "查找",
+      "aliases": [
+        "callers",
+        "调用者",
+        "related items"
+      ],
+      "tags": [
+        "xcode",
+        "ios",
+        "查找",
+        "导航"
+      ],
+      "cmd": "Xcode 快捷键",
+      "mac": "Ctrl + 1",
+      "weight": 10
+    },
+    {
+      "id": "xcode-go-back-forward",
+      "title": "返回/前进 (Go Back / Forward)",
+      "action": "在历史浏览记录中后退或前进（类似浏览器）",
+      "keys": "macOS: Ctrl + Cmd + ← / →",
+      "mode": "gui",
+      "keyword": "导航",
+      "aliases": [
+        "back",
+        "forward",
+        "返回",
+        "前进"
+      ],
+      "tags": [
+        "xcode",
+        "ios",
+        "导航"
+      ],
+      "cmd": "Xcode 快捷键",
+      "mac": "Ctrl + Cmd + ← / →",
+      "weight": 10
+    },
+    {
+      "id": "xcode-jump-to-line",
+      "title": "跳转到指定行 (Jump to Line)",
+      "action": "输入行号直接跳转",
+      "keys": "macOS: Cmd + L",
+      "mode": "gui",
+      "keyword": "跳转",
+      "aliases": [
+        "jump line",
+        "跳到行"
+      ],
+      "tags": [
+        "xcode",
+        "ios",
+        "导航"
+      ],
+      "cmd": "Xcode 快捷键",
+      "mac": "Cmd + L",
+      "weight": 8
+    },
+    {
+      "id": "xcode-build",
+      "title": "编译项目 (Build)",
+      "action": "编译当前 Xcode 项目",
+      "keys": "macOS: Cmd + B",
+      "mode": "gui",
+      "keyword": "编译",
+      "aliases": [
+        "build",
+        "编译"
+      ],
+      "tags": [
+        "xcode",
+        "ios",
+        "运行"
+      ],
+      "cmd": "xcodebuild build",
+      "mac": "Cmd + B",
+      "weight": 11
+    },
+    {
+      "id": "xcode-run",
+      "title": "运行项目 (Run)",
+      "action": "编译并在模拟器或真机上运行项目",
+      "keys": "macOS: Cmd + R",
+      "mode": "gui",
+      "keyword": "运行",
+      "aliases": [
+        "run",
+        "运行"
+      ],
+      "tags": [
+        "xcode",
+        "ios",
+        "运行"
+      ],
+      "cmd": "xcodebuild run",
+      "mac": "Cmd + R",
+      "weight": 11
+    },
+    {
+      "id": "xcode-stop",
+      "title": "停止运行 (Stop)",
+      "action": "停止当前正在运行的 App",
+      "keys": "macOS: Cmd + .",
+      "mode": "gui",
+      "keyword": "停止",
+      "aliases": [
+        "stop",
+        "停止"
+      ],
+      "tags": [
+        "xcode",
+        "ios",
+        "运行"
+      ],
+      "cmd": "Xcode 快捷键",
+      "mac": "Cmd + .",
+      "weight": 10
+    },
+    {
+      "id": "xcode-test",
+      "title": "测试项目 (Test)",
+      "action": "运行项目的单元测试和 UI 测试",
+      "keys": "macOS: Cmd + U",
+      "mode": "gui",
+      "keyword": "测试",
+      "aliases": [
+        "test",
+        "测试"
+      ],
+      "tags": [
+        "xcode",
+        "ios",
+        "运行"
+      ],
+      "cmd": "xcodebuild test",
+      "mac": "Cmd + U",
+      "weight": 9
+    },
+    {
+      "id": "xcode-clean",
+      "title": "清理构建目录 (Clean)",
+      "action": "清理项目的 Build 缓存",
+      "keys": "macOS: Cmd + Shift + K",
+      "mode": "gui",
+      "keyword": "清理",
+      "aliases": [
+        "clean",
+        "清理缓存"
+      ],
+      "tags": [
+        "xcode",
+        "ios",
+        "运行"
+      ],
+      "cmd": "xcodebuild clean",
+      "mac": "Cmd + Shift + K",
+      "weight": 10
+    },
+    {
+      "id": "xcode-clean-build-folder",
+      "title": "彻底清理构建目录 (Clean Build Folder)",
+      "action": "彻底清理衍生数据 (Derived Data)，解决各种玄学编译报错",
+      "keys": "macOS: Cmd + Opt + Shift + K",
+      "mode": "gui",
+      "keyword": "清理",
+      "aliases": [
+        "deep clean",
+        "彻底清理",
+        "derived data"
+      ],
+      "tags": [
+        "xcode",
+        "ios",
+        "运行",
+        "排错"
+      ],
+      "cmd": "Xcode 快捷键",
+      "mac": "Cmd + Opt + Shift + K",
+      "weight": 11
+    },
+    {
+      "id": "xcode-toggle-navigator",
+      "title": "显示/隐藏左侧导航栏",
+      "action": "切换左侧 Project Navigator 的显示状态",
+      "keys": "macOS: Cmd + 0",
+      "mode": "shortcut",
+      "keyword": "视图",
+      "aliases": [
+        "navigator",
+        "左侧栏"
+      ],
+      "tags": [
+        "xcode",
+        "ios",
+        "视图"
+      ],
+      "cmd": "Xcode 快捷键",
+      "mac": "Cmd + 0",
+      "weight": 9
+    },
+    {
+      "id": "xcode-toggle-inspectors",
+      "title": "显示/隐藏右侧检查器",
+      "action": "切换右侧 Inspectors 的显示状态",
+      "keys": "macOS: Cmd + Opt + 0",
+      "mode": "shortcut",
+      "keyword": "视图",
+      "aliases": [
+        "inspector",
+        "右侧栏"
+      ],
+      "tags": [
+        "xcode",
+        "ios",
+        "视图"
+      ],
+      "cmd": "Xcode 快捷键",
+      "mac": "Cmd + Opt + 0",
+      "weight": 8
+    },
+    {
+      "id": "xcode-toggle-debug",
+      "title": "显示/隐藏底部调试区",
+      "action": "切换底部 Debug Area (控制台/变量区) 的显示状态",
+      "keys": "macOS: Cmd + Shift + Y",
+      "mode": "shortcut",
+      "keyword": "视图",
+      "aliases": [
+        "debug",
+        "控制台",
+        "底部栏"
+      ],
+      "tags": [
+        "xcode",
+        "ios",
+        "视图",
+        "调试"
+      ],
+      "cmd": "Xcode 快捷键",
+      "mac": "Cmd + Shift + Y",
+      "weight": 10
+    },
+    {
+      "id": "xcode-assistant-editor",
+      "title": "打开分屏编辑器 (Assistant Editor)",
+      "action": "并排显示相关文件（如 View 和 ViewController）",
+      "keys": "macOS: Ctrl + Opt + Cmd + Enter",
+      "mode": "shortcut",
+      "keyword": "视图",
+      "aliases": [
+        "split",
+        "分屏",
+        "assistant"
+      ],
+      "tags": [
+        "xcode",
+        "ios",
+        "视图"
+      ],
+      "cmd": "Xcode 快捷键",
+      "mac": "Ctrl + Opt + Cmd + Enter",
+      "weight": 8
+    },
+    {
+      "id": "xcode-format-code",
+      "title": "格式化代码 (Re-indent)",
+      "action": "对选中的代码进行重新缩进格式化",
+      "keys": "macOS: Ctrl + I",
+      "mode": "gui",
+      "keyword": "格式化",
+      "aliases": [
+        "format",
+        "缩进",
+        "re-indent"
+      ],
+      "tags": [
+        "xcode",
+        "ios",
+        "编辑"
+      ],
+      "cmd": "Xcode 快捷键",
+      "mac": "Ctrl + I",
+      "weight": 11
+    },
+    {
+      "id": "xcode-edit-all-in-scope",
+      "title": "局部批量重命名 (Edit All in Scope)",
+      "action": "在当前作用域内批量重命名变量",
+      "keys": "macOS: Ctrl + Cmd + E",
+      "mode": "gui",
+      "keyword": "重命名",
+      "aliases": [
+        "rename",
+        "重命名",
+        "edit all"
+      ],
+      "tags": [
+        "xcode",
+        "ios",
+        "编辑"
+      ],
+      "cmd": "Xcode 快捷键",
+      "mac": "Ctrl + Cmd + E",
+      "weight": 10
+    },
+    {
+      "id": "xcode-comment",
+      "title": "注释/取消注释",
+      "action": "对选中的代码行进行注释或取消注释",
+      "keys": "macOS: Cmd + /",
+      "mode": "gui",
+      "keyword": "注释",
+      "aliases": [
+        "comment",
+        "注释"
+      ],
+      "tags": [
+        "xcode",
+        "ios",
+        "编辑"
+      ],
+      "cmd": "Xcode 快捷键",
+      "mac": "Cmd + /",
+      "weight": 9
+    },
+    {
+      "id": "xcode-move-line",
+      "title": "上/下移动代码行",
+      "action": "将当前行或选中的代码块向上/向下移动",
+      "keys": "macOS: Cmd + Opt + [ 或 ]",
+      "mode": "gui",
+      "keyword": "移动",
+      "aliases": [
+        "move line",
+        "移动行"
+      ],
+      "tags": [
+        "xcode",
+        "ios",
+        "编辑"
+      ],
+      "cmd": "Xcode 快捷键",
+      "mac": "Cmd + Opt + [ / ]",
+      "weight": 8
+    },
+    {
+      "id": "xcode-fold-code",
+      "title": "折叠/展开代码块",
+      "action": "折叠或展开当前方法/类的代码块",
+      "keys": "macOS: Cmd + Opt + ← / →",
+      "mode": "gui",
+      "keyword": "折叠",
+      "aliases": [
+        "fold",
+        "unfold",
+        "折叠代码"
+      ],
+      "tags": [
+        "xcode",
+        "ios",
+        "编辑"
+      ],
+      "cmd": "Xcode 快捷键",
+      "mac": "Cmd + Opt + ← / →",
+      "weight": 8
+    },
+    {
+      "id": "xcode-add-breakpoint",
+      "title": "添加/取消断点",
+      "action": "在当前行添加或取消断点",
+      "keys": "macOS: Cmd + \\",
+      "mode": "gui",
+      "keyword": "调试",
+      "aliases": [
+        "breakpoint",
+        "断点"
+      ],
+      "tags": [
+        "xcode",
+        "ios",
+        "调试"
+      ],
+      "cmd": "Xcode 快捷键",
+      "mac": "Cmd + \\",
+      "weight": 10
+    },
+    {
+      "id": "xcode-toggle-breakpoints",
+      "title": "启用/禁用所有断点",
+      "action": "一键开启或关闭全局所有断点",
+      "keys": "macOS: Cmd + Y",
+      "mode": "gui",
+      "keyword": "调试",
+      "aliases": [
+        "disable breakpoints",
+        "全局断点"
+      ],
+      "tags": [
+        "xcode",
+        "ios",
+        "调试"
+      ],
+      "cmd": "Xcode 快捷键",
+      "mac": "Cmd + Y",
+      "weight": 9
+    },
+    {
+      "id": "xcode-debug-step-over",
+      "title": "单步跳过 (Step Over)",
+      "action": "调试时执行下一行代码，不进入函数内部",
+      "keys": "macOS: F6",
+      "mode": "gui",
+      "keyword": "调试",
+      "aliases": [
+        "step over",
+        "单步跳过"
+      ],
+      "tags": [
+        "xcode",
+        "ios",
+        "调试"
+      ],
+      "cmd": "Xcode 快捷键",
+      "mac": "F6",
+      "weight": 8
+    },
+    {
+      "id": "xcode-debug-step-into",
+      "title": "单步进入 (Step Into)",
+      "action": "调试时进入当前行的函数内部",
+      "keys": "macOS: F7",
+      "mode": "gui",
+      "keyword": "调试",
+      "aliases": [
+        "step into",
+        "单步进入"
+      ],
+      "tags": [
+        "xcode",
+        "ios",
+        "调试"
+      ],
+      "cmd": "Xcode 快捷键",
+      "mac": "F7",
+      "weight": 8
+    },
+    {
+      "id": "xcode-debug-continue",
+      "title": "继续执行 (Continue)",
+      "action": "调试时跳过当前断点，继续执行到下一个断点",
+      "keys": "macOS: Ctrl + Cmd + Y",
+      "mode": "gui",
+      "keyword": "调试",
+      "aliases": [
+        "continue",
+        "继续执行"
+      ],
+      "tags": [
+        "xcode",
+        "ios",
+        "调试"
+      ],
+      "cmd": "Xcode 快捷键",
+      "mac": "Ctrl + Cmd + Y",
+      "weight": 9
+    }
+  ]
+}

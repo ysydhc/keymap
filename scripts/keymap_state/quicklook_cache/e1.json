@@ -1,0 +1,22 @@
+{
+  "_schema": "keymap_quicklook_v1",
+  "context": "search_result",
+  "tool_file": "claude-code.json",
+  "entry_id": "e1",
+  "title": "Shift+Tab — 切换权限模式",
+  "keyword": "权限",
+  "cmd_template": "shift+tab",
+  "cmd_preview": "shift+tab",
+  "params": [],
+  "shortcut": "shift+tab",
+  "mode": "normal",
+  "action": "...",
+  "description": null,
+  "tags": [
+    "claude-code",
+    "快捷键"
+  ],
+  "deprecated": false,
+  "replaced_by": null,
+  "note": "由索引生成的配置视图；含 cmd 模板与当前预览。官方文档见 doc_url。"
+}
