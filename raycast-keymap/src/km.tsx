@@ -387,8 +387,8 @@ export default function Command(props: LaunchProps<{ arguments: CommandArguments
           if (contextTags.includes(b.category?.toLowerCase() || "")) contextBoostB = 5000;
         }
         
-        // For speckit category, strictly sort by weight (which represents the 1-8 order)
-        if (activeCategory === "speckit" || (a.category === "speckit" && b.category === "speckit")) {
+        // If both items have fixedOrder set to true, strictly sort by weight
+        if (a.fixedOrder && b.fixedOrder) {
           return (b.weight || 0) - (a.weight || 0);
         }
 
@@ -501,8 +501,8 @@ export default function Command(props: LaunchProps<{ arguments: CommandArguments
       // 权重加成
       score += (tool.weight || 0);
 
-      // Frecency 加成 (每次使用加 100 分，但对于 speckit 这种需要严格保序的跳过 frecency 加成)
-      if (category !== "speckit") {
+      // Frecency 加成 (每次使用加 100 分，如果设定了 fixedOrder 则跳过)
+      if (!tool.fixedOrder) {
         score += (frecency[tool.id] || 0) * 100;
       }
 

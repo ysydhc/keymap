@@ -43,6 +43,7 @@ export interface Tool {
   tags?: string[];
   cmd: string;
   weight?: number;
+  fixedOrder?: boolean;
   params?: Param[];
   description?: string;
   doc?: string;
