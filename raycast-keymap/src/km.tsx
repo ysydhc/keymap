@@ -516,7 +516,13 @@ export default function Command(props: LaunchProps<{ arguments: CommandArguments
 
     return scored
       .filter(item => item.score > 0)
-      .sort((a, b) => b.score - a.score)
+      .sort((a, b) => {
+        // If both items have fixedOrder set to true, strictly sort by weight
+        if (a.tool.fixedOrder && b.tool.fixedOrder) {
+          return (b.tool.weight || 0) - (a.tool.weight || 0);
+        }
+        return b.score - a.score;
+      })
       .map(item => item.tool);
   }, [tools, searchText, frecency, activeCategory, listMode, isAIMode, masteredCmds, categories]);
 
