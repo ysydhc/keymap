@@ -387,6 +387,11 @@ export default function Command(props: LaunchProps<{ arguments: CommandArguments
           if (contextTags.includes(b.category?.toLowerCase() || "")) contextBoostB = 5000;
         }
         
+        // For speckit category, strictly sort by weight (which represents the 1-8 order)
+        if (activeCategory === "speckit" || (a.category === "speckit" && b.category === "speckit")) {
+          return (b.weight || 0) - (a.weight || 0);
+        }
+
         const scoreA = (frecency[a.id] || 0) * 100 + (a.weight || 0) + contextBoostA - (masteredCmds[a.id] ? 10000 : 0);
         const scoreB = (frecency[b.id] || 0) * 100 + (b.weight || 0) + contextBoostB - (masteredCmds[b.id] ? 10000 : 0);
         return scoreB - scoreA;
@@ -496,8 +501,10 @@ export default function Command(props: LaunchProps<{ arguments: CommandArguments
       // 权重加成
       score += (tool.weight || 0);
 
-      // Frecency 加成 (每次使用加 100 分)
-      score += (frecency[tool.id] || 0) * 100;
+      // Frecency 加成 (每次使用加 100 分，但对于 speckit 这种需要严格保序的跳过 frecency 加成)
+      if (category !== "speckit") {
+        score += (frecency[tool.id] || 0) * 100;
+      }
 
       // 已掌握的命令降低权重，但保持大于0，使其排在最后
       if (masteredCmds[tool.id]) {
